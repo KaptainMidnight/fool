@@ -9,8 +9,7 @@ final readonly class CreateUser
 {
     public function __construct(
         private array $data
-    ) {
-    }
+    ) {}
 
     public function execute(): UserDTO
     {

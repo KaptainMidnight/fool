@@ -5,14 +5,12 @@ namespace App\Application\DTOs;
 final readonly class UserDTO
 {
     public function __construct(
-        private int    $id,
-        private int    $telegramID,
+        private int $id,
+        private int $telegramID,
         private string $username,
-        private int    $cash,
-        private int    $coins
-    )
-    {
-    }
+        private int $cash,
+        private int $coins
+    ) {}
 
     public function getId(): int
     {

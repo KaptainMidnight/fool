@@ -2,7 +2,6 @@
 
 namespace App\Interfaces\Http\Controllers;
 
-use App\Application\UseCases\CreateUser;
 use App\Domain\Repositories\Contracts\UserableContract;
 use App\Infrastructure\Persistence\Eloquent\User;
 use App\Interfaces\Http\Requests\AuthorizeUserRequest;
@@ -14,7 +13,7 @@ class AuthController
         $data = decrypt($request->hash);
         $user = User::query()->firstOrCreate(['id' => $data['id']], [
             'username' => $data['username'],
-            'telegram_id' => $data['id']
+            'telegram_id' => $data['id'],
         ]);
 
         $token = $user->createToken($request->ip())?->plainTextToken;

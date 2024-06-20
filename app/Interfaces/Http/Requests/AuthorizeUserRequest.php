@@ -22,7 +22,7 @@ class AuthorizeUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'hash' => ['required', 'string']
+            'hash' => ['required', 'string'],
         ];
     }
 }
