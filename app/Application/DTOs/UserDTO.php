@@ -9,7 +9,8 @@ final readonly class UserDTO
         private int $telegramID,
         private string $username,
         private int $cash,
-        private int $coins
+        private int $coins,
+        private ?array $achievements,
     ) {}
 
     public function getId(): int
@@ -37,6 +38,11 @@ final readonly class UserDTO
         return $this->coins;
     }
 
+    public function getAchievements(): ?array
+    {
+        return $this->achievements;
+    }
+
     public static function fromArray(array $data): UserDTO
     {
         return new self(
@@ -44,7 +50,8 @@ final readonly class UserDTO
             telegramID: $data['telegram_id'],
             username: $data['username'],
             cash: $data['cash'],
-            coins: $data['coins']
+            coins: $data['coins'],
+            achievements: null,
         );
     }
 }
