@@ -4,9 +4,10 @@ namespace App\Domain\Services;
 
 use App\Domain\Entities\Game;
 use App\Domain\Repositories\Contracts\GambleContract;
+use App\Domain\Services\Contracts\GameContract;
 use App\Domain\ValueObjects\Card;
 
-final class GameService
+final readonly class GameService implements GameContract
 {
     public function __construct(
         private GambleContract $contract

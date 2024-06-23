@@ -11,7 +11,9 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
         <script src="https://unpkg.com/centrifuge@5.0.0/dist/centrifuge.js"></script>
         <script>
-            const centrifugo = new Centrifuge('ws://127.0.0.1:8888/connection/websocket')
+            const centrifugo = new Centrifuge('ws://127.0.0.1:8888/connection/websocket', {
+                token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzE5NjgxODY5LCJpYXQiOjE3MTkwNzcwNjl9.wPyuATAfihtN01xXDVL7rZUzb7euIheRpPyWKStmw_Q'
+            })
 
             centrifugo.on('connected', ctx => {
                 console.log(ctx)
