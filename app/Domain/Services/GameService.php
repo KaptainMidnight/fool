@@ -13,7 +13,7 @@ final readonly class GameService implements GameContract
         private GambleContract $contract
     ) {}
 
-    public function startGame(array $players): void
+    public function startGame(array $players): Game
     {
         $deck = $this->initializeDeck();
         $hands = $this->dealCards($players, $deck);
@@ -32,6 +32,8 @@ final readonly class GameService implements GameContract
         );
 
         $this->contract->save($game);
+
+        return $game;
     }
 
     public function initializeDeck(): array

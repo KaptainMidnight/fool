@@ -43,7 +43,7 @@ final readonly class UserDTO
         return $this->achievements;
     }
 
-    public static function fromArray(array $data): UserDTO
+    public static function fromArray(array $data): self
     {
         return new self(
             id: $data['id'],
