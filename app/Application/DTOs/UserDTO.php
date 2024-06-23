@@ -2,7 +2,10 @@
 
 namespace App\Application\DTOs;
 
-final readonly class UserDTO
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Contracts\Support\Arrayable;
+
+final readonly class UserDTO implements Arrayable
 {
     public function __construct(
         private int $id,
@@ -43,7 +46,7 @@ final readonly class UserDTO
         return $this->achievements;
     }
 
-    public static function fromArray(array $data): self
+    public static function fromArray(array|Authenticatable $data): self
     {
         return new self(
             id: $data['id'],
@@ -53,5 +56,17 @@ final readonly class UserDTO
             coins: $data['coins'],
             achievements: null,
         );
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'telegram_id' => $this->telegramID,
+            'username' => $this->username,
+            'cash' => $this->cash ?? 0,
+            'coins' => $this->coins ?? 1000,
+            'achievements' => $this->achievements,
+        ];
     }
 }
