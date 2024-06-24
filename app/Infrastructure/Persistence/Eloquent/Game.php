@@ -4,6 +4,7 @@ namespace App\Infrastructure\Persistence\Eloquent;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Game extends Model
 {
@@ -27,5 +28,10 @@ class Game extends Model
             'table' => 'array',
             'hands' => 'array',
         ];
+    }
+
+    public function messages(): HasMany
+    {
+        return $this->hasMany(Message::class);
     }
 }
