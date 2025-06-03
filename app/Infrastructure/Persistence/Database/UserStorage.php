@@ -11,7 +11,7 @@ class UserStorage
     public function findByTelegramId(int $telegramId): ?User
     {
         $userModel = UserModel::query()->where('telegram_id', $telegramId)->first();
-        if (!$userModel) {
+        if (! $userModel) {
             return null;
         }
 

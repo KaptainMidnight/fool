@@ -11,16 +11,6 @@ jobs:
     name: Set up Laravel tests
     runs-on: ubuntu-latest
 
-    services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: laravel
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-
     steps:
     - uses: actions/checkout@v3
 
@@ -41,7 +31,7 @@ jobs:
         echo "DB_CONNECTION=sqlite" >> .env
         echo "DB_DATABASE=${{ github.workspace }}/database/database.sqlite" >> .env
     - name: Set up security system key
-      run: echo "TELEGRAM_BOT_TOKEN=${{ secrets.BOT_TOKEN }} >> .env
+      run: echo "TELEGRAM_BOT_TOKEN=${{ secrets.BOT_TOKEN }}" >> .env
 
     - name: Run migrations
       run: php artisan migrate
@@ -55,26 +45,5 @@ jobs:
     - name: Run tests
       run: php artisan test
 
-#    - name: Change session driver to file
-#      run: echo "SESSION_DRIVER=file" >> .env
-#
-#    - name: Analyzing code project via Laravel Pint
-#      run: ./vendor/bin/pint --test
-
-#  deploy:
-#    name: Deploy on production
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#      - name: Install SSH keys
-#        run: |
-#          install -m 600 -D /dev/null ~/.ssh/id_rsa
-#          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-#          ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
-#      - name: Connect and pull
-#        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git pull origin main && composer install && php artisan migrate && php artisan optimize:clear && npm run build && exit"
-#      - name: Cleanup
-#        run: rm -rf ~/.ssh
-#      - name: Notify about deploy in telegram
-#        run: |
-#          curl --silent -o /dev/null -X GET "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage?chat_id=${{ secrets.TELEGRAM_ADMIN_ID }}&text=🟢Деплой+завершен"
+    - name: Analyzing code project via Laravel Pint
+      run: ./vendor/bin/pint --test

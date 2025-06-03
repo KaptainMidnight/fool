@@ -9,6 +9,7 @@ use App\Domain\Auth\Repositories\UserRepositoryContract;
 readonly class TelegramAuthService
 {
     private string $botToken;
+
     public function __construct(
         private UserRepositoryContract $userRepository,
     ) {
@@ -34,12 +35,12 @@ readonly class TelegramAuthService
      */
     public function authenticate(array $data): User
     {
-        if (!$this->verify($data)) {
+        if (! $this->verify($data)) {
             throw AuthException::invalidTelegramData();
         }
 
         $user = $this->userRepository->findByTelegramId($data['id']);
-        if (!$user) {
+        if (! $user) {
             $user = new User(
                 name: $data['first_name'],
                 surname: $data['last_name'],

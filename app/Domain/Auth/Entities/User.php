@@ -7,7 +7,7 @@ class User
     public function __construct(
         private readonly string $name,
         private readonly string $surname,
-        private readonly int    $telegramId,
+        private readonly int $telegramId,
         private readonly string $username,
     ) {}
 

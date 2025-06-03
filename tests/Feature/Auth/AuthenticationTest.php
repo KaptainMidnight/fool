@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Feature\Auth;
 
 use App\Models\User;
@@ -14,10 +15,11 @@ class AuthenticationTest extends TestCase
         $checkString = collect($data)
             ->except('hash')
             ->sortKeys()
-            ->map(fn($value, $key) => "$key=$value")
+            ->map(fn ($value, $key) => "$key=$value")
             ->implode("\n");
 
         $secretKey = hash('sha256', config('telegram.bot_token'), true);
+
         return hash_hmac('sha256', $checkString, $secretKey);
     }
 
